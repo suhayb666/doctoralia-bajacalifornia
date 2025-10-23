@@ -37,6 +37,7 @@ class DoctoraliaPhoneExtractor:
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_argument("--remote-debugging-port=9222")  # avoid crash
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
         
@@ -49,7 +50,7 @@ class DoctoraliaPhoneExtractor:
             logger.info(f"Using proxy: {self.proxy_address}")
         
         # Uncomment the line below to run headless (without opening browser window)
-        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless=new")  # use modern headless mode
         
         try:
             self.driver = webdriver.Chrome(options=chrome_options)
@@ -365,6 +366,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
